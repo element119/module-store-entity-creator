@@ -13,6 +13,9 @@
                 <item name="createWebsite" xsi:type="object">
                     Element119\StoreEntityCreator\Console\Command\CreateWebsite
                 </item>
+                <item name="createStore" xsi:type="object">
+                    Element119\StoreEntityCreator\Console\Command\CreateStore
+                </item>
             </argument>
         </arguments>
     </type>
