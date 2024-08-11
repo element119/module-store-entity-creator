@@ -16,6 +16,9 @@
                 <item name="createStore" xsi:type="object">
                     Element119\StoreEntityCreator\Console\Command\CreateStore
                 </item>
+                <item name="createStoreView" xsi:type="object">
+                    Element119\StoreEntityCreator\Console\Command\CreateStoreView
+                </item>
             </argument>
         </arguments>
     </type>
