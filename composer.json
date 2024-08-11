@@ -1,8 +1,8 @@
 {
-    "name": "element119/module-name",
+    "name": "element119/module-store-entity-creator",
     "type": "magento2-module",
-    "description": "A Magento 2 module that...",
-    "license": "proprietary",
+    "description": "A Magento 2 CLI utility to allow developers to create new websites, stores, and store views.",
+    "license": "MIT",
     "authors": [
         {
             "name": "element119",
@@ -10,11 +10,11 @@
         }
     ],
     "require": {
-        "magento/module-name": "^100.0"
+        "magento/module-store": "~100.0.2"
     },
     "autoload": {
         "psr-4": {
-            "Element119\\ModuleName\\": ""
+            "Element119\\StoreEntityCreator\\": ""
         },
         "files": [
             "registration.php"
