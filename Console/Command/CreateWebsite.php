@@ -76,10 +76,13 @@ class CreateWebsite extends Command
         try {
             $this->websiteCreator->create($websiteData);
         } catch (Exception $e) {
+            $output->writeln('Failed to create new website:');
             $output->writeln($e->getMessage());
 
             return CLI::RETURN_FAILURE;
         }
+
+        $output->writeln('Website created.');
 
         return Cli::RETURN_SUCCESS;
     }

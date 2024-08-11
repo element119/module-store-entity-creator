@@ -75,10 +75,13 @@ class CreateStoreView extends Command
         try {
             $this->storeViewCreator->create($storeViewData);
         } catch (Exception $e) {
+            $output->writeln('Failed to create new store view:');
             $output->writeln($e->getMessage());
 
             return CLI::RETURN_FAILURE;
         }
+
+        $output->writeln('Store view created.');
 
         return Cli::RETURN_SUCCESS;
     }

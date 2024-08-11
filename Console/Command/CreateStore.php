@@ -72,10 +72,13 @@ class CreateStore extends Command
         try {
             $this->storeCreator->create($storeData);
         } catch (Exception $e) {
+            $output->writeln('Failed to create new store:');
             $output->writeln($e->getMessage());
 
             return CLI::RETURN_FAILURE;
         }
+
+        $output->writeln('Store created.');
 
         return Cli::RETURN_SUCCESS;
     }
