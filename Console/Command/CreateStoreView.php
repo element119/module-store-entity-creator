@@ -9,7 +9,9 @@ namespace Element119\StoreEntityCreator\Console\Command;
 
 use Element119\StoreEntityCreator\Model\StoreViewCreator;
 use Exception;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Console\Cli;
+use Magento\Store\Model\StoreManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,14 +25,17 @@ class CreateStoreView extends Command
     private const INPUT_OPTION_SORT_ORDER = 'sort-order';
 
     private StoreViewCreator $storeViewCreator;
+    private StoreManagerInterface $storeManager;
 
     public function __construct(
         StoreViewCreator $storeViewCreator,
+        StoreManagerInterface $storeManager = null,
         ?string $name = null
     ) {
         parent::__construct($name);
 
         $this->storeViewCreator = $storeViewCreator;
+        $this->storeManager = $storeManager ?: ObjectManager::getInstance()->get(StoreManagerInterface::class);
     }
 
     protected function configure()
@@ -70,6 +75,9 @@ class CreateStoreView extends Command
             StoreViewCreator::STORE_VIEW_STORE_ID => $input->getArgument(self::INPUT_ARGUMENT_STORE_ID),
             StoreViewCreator::STORE_VIEW_SORT_ORDER => $input->getOption(self::INPUT_OPTION_SORT_ORDER),
             StoreViewCreator::STORE_VIEW_STATUS => !$input->getOption(self::INPUT_OPTION_DISABLED),
+            StoreViewCreator::STORE_VIEW_WEBSITE_ID => $this->getWebsiteId(
+                (int)$input->getArgument(self::INPUT_ARGUMENT_STORE_ID)
+            ),
         ];
 
         try {
@@ -84,5 +92,10 @@ class CreateStoreView extends Command
         $output->writeln('Store view created.');
 
         return Cli::RETURN_SUCCESS;
+    }
+
+    private function getWebsiteId(int $storeId): int
+    {
+        return (int)$this->storeManager->getGroup($storeId)->getWebsiteId();
     }
 }
