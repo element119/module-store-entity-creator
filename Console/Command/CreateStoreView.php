@@ -29,7 +29,7 @@ class CreateStoreView extends Command
 
     public function __construct(
         StoreViewCreator $storeViewCreator,
-        StoreManagerInterface $storeManager = null,
+        ?StoreManagerInterface $storeManager = null,
         ?string $name = null
     ) {
         parent::__construct($name);
